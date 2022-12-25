@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.fish.mapper.FishMapper">
+    <!--전체 물고기 조회-->
+    <select id="selectAll" resultType="fishVO">
+        SELECT FISH_NUMBER, FISH_NAME, FISH_COUNT
+        FROM TBL_FISH
+    </select>
+    <!--물고기 이름으로 몇마리 있는지 조회-->
+    <select id="select" resultType="fishVO">
+        SELECT FISH_NUMBER, FISH_NAME, FISH_COUNT
+        FROM TBL_FISH
+        WHERE FISH_NAME = #{fishName}
+    </select>
+    <!--물고기 추가-->
+    <insert id="insert">
+        INSERT INTO TBL_FISH
+        (FISH_NUMBER, FISH_NAME, FISH_COUNT)
+        VALUES(SEQ_FISH.NEXTVAL, #{fishName}, #{fishCount})
+    </insert>
+    <!--물고기 정보 변경-->
+    <update id="update">
+        UPDATE TBL_FISH
+        SET FISH_NAME=#{fishName}, FISH_COUNT=#{fishCount}
+        WHERE FISH_NUMBER= #{fishNumber}
+    </update>
+    <!--물고기 삭제-->
+    <delete id="delete">
+        DELETE FROM TBL_FISH
+        WHERE FISH_NUMBER = #{fishNumber}
+    </delete>
+</mapper>
